@@ -1,0 +1,8 @@
+*.swp
+*.dll
+*.pdb
+*.user
+.DS_Store
+node_modules
+bin
+obj

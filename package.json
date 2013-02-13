@@ -1,0 +1,21 @@
+{
+  "name": "msharp.js",
+  "version": "1.0.0",
+  "description": "yet another JavaScript library",
+  "directories": {
+    "test": "test",
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esson/msharp.js.git"
+  },
+  "devDependencies": {
+    "uglify-js": "*",
+    "commander": "*"
+  },
+  "author": "Martin Eriksson"
+}
