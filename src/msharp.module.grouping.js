@@ -3,43 +3,43 @@
 
 (function (msharp) {
 
-    var Enumerable = msharp.require('msharp.Enumerable');
+	var Enumerable = msharp.require('msharp.Enumerable');
 
-    // Create Object
-    // -------------
+	// Create Object
+	// -------------
 
-    msharp.Grouping = (function () {
+	msharp.Grouping = (function () {
 
-    	// Inherit Enumerable
-        // -----------------------
-        
-        msharp.inherit(Grouping, Enumerable);
-        
-        // Constructor
-        // -----------
-        
-        function Grouping(key, group) {
-            /// <summary>Represents a collection of objects that have a common key.</summary>
-            /// <param name="key" type="Anything">The key of the Grouping.</param>
-            /// <param name="group" type="Array">The values of the Grouping.</param>
-    
-            /// <field name="key" type="Anything">The key of the Grouping.</field>
-            this.key = key;
-    
-            // Call the constructor of the base object.
-            //
-            Enumerable.call(this, group);
-        };
+		// Inherit Enumerable
+		// -----------------------
 
-        // Debug Code
-        // ----------
+		msharp.inherit(Grouping, Enumerable);
 
-        if (DEBUG) {
+		// Constructor
+		// -----------
 
-        }
-    
-        return Grouping;
+		function Grouping(key, group) {
+			/// <summary>Represents a collection of objects that have a common key.</summary>
+			/// <param name="key" type="Anything">The key of the Grouping.</param>
+			/// <param name="group" type="Array">The values of the Grouping.</param>
 
-    })();
+			/// <field name="key" type="Anything">The key of the Grouping.</field>
+			this.key = key;
+
+			// Call the constructor of the base object.
+			//
+			Enumerable.call(this, group);
+		};
+
+		// Debug Code
+		// ----------
+
+		if (DEBUG) {
+
+		}
+
+		return Grouping;
+
+	})();
 
 })(msharp);

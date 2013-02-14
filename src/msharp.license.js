@@ -1,6 +1,5 @@
-/*jslint browser: true, nomen: true, plusplus: true, undef: true, vars: true, white: true */
 /**
- * Library Template
+ * msharp.js
  * v{{version}} ({{build_date}})
  *
  * By Martin Eriksson

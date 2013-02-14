@@ -6,8 +6,8 @@
 var DIST_NAME = 'msharp',
     DIST_FOLDER = 'dist',
     replacements = {
-        'version': null,
-        'build_date': (new Date()).toGMTString()
+    	'version': null,
+    	'build_date': (new Date()).toGMTString()
     },
     LICENSE_FILE = 'src/msharp.license.js',
     HEAD_FILE_LIST = [
@@ -22,8 +22,7 @@ var DIST_NAME = 'msharp',
         'src/msharp.module.enumerator.js',
         'src/msharp.module.enumerable.js',
         'src/msharp.module.grouping.js',
-        'src/msharp.module.list.js',
-        'src/msharp.module.debug.js'
+        'src/msharp.module.list.js'
     ],
     TAIL_FILE_LIST = [
         'src/msharp.outro.js'
@@ -42,8 +41,7 @@ var _cli = require('commander'),
 
 _cli
     .version('0.1.0')
-    .option('--ver <build version>',
-        'A string representing the semver build version to record in the source (eg. 5.0.2)')
+    .option('--ver <build version>', 'A string representing the semver build version to record in the source (eg. 5.0.2)')
     .parse(process.argv);
 
 
@@ -55,63 +53,62 @@ _cli
  * @param {object} data Object containing replacement values.
  */
 function stache(template, data) {
-    function replaceFn(match, prop) {
-        return (prop in data) ? data[prop] : '';
-    }
+	function replaceFn(match, prop) {
+		return (prop in data) ? data[prop] : '';
+	}
 
-    return template.replace(/\{\{(\w+)\}\}/g, replaceFn);
+	return template.replace(/\{\{(\w+)\}\}/g, replaceFn);
 }
 
 function contains(arr, val) {
-    return arr.indexOf(val) !== -1;
+	return arr.indexOf(val) !== -1;
 }
 
 function echoFileSize(filename, explanatoryString) {
-    // Should be called only after minification completed.
+	// Should be called only after minification completed.
 
-    // Below code gives error. Is cat not available in Windows?
-    // "'cat' is not recognized as an internal or external command, operable program or batch file."
+	// Below code gives error. Is cat not available in Windows?
+	// "'cat' is not recognized as an internal or external command, operable program or batch file."
 
-    try {
-        _exec(
+	try {
+		_exec(
         'cat ' + filename + ' | gzip -9f | wc -c',
         function (error, stdout, stderr) {
-            if (error) {
-                console.log(stderr);
-            } else {
-                console.log(explanatoryString);
-                console.log('   The file size, minified and gzipped, is: '
-                  + (stdout + '').replace(/[\s\n]/g, '') + ' bytes.');
-            }
+        	if (error) {
+        		console.log(stderr);
+        	} else {
+        		console.log(explanatoryString);
+        		console.log('   The file size, minified and gzipped, is: ' + (stdout + '').replace(/[\s\n]/g, '') + ' bytes.');
+        	}
         }
       );
-    } catch (e) {
+	} catch (e) {
 
-    }
+	}
 }
 
 
 // ---  CONCAT --- //
 
 function getFileList() {
-    var files = HEAD_FILE_LIST.slice(0);
-    files = files.concat(CORE_FILE_LIST);
-    files = files.concat(TAIL_FILE_LIST);
+	var files = HEAD_FILE_LIST.slice(0);
+	files = files.concat(CORE_FILE_LIST);
+	files = files.concat(TAIL_FILE_LIST);
 
-    return files;
+	return files;
 }
 
 function concatFiles(fileList) {
-    var out = fileList.map(function (filePath) {
-        return _fs.readFileSync(filePath);
-    });
+	var out = fileList.map(function (filePath) {
+		return _fs.readFileSync(filePath);
+	});
 
-    return out.join('');
+	return out.join('');
 }
 
 if (!_cli.ver) {
-    console.log('   ERROR: Please provide a version number (with "--ver").');
-    process.exit(1); //exit with error
+	console.log('   ERROR: Please provide a version number (with "--ver").');
+	process.exit(1); //exit with error
 }
 
 replacements.version = _cli.ver;
@@ -122,8 +119,8 @@ _fs.writeFileSync(_distFileName, stache(concatFiles(getFileList()), replacements
 // --- MINIFICATION ---- //
 
 function getLicense() {
-    var srcLicense = _fs.readFileSync(LICENSE_FILE, 'utf-8');
-    return stache(srcLicense, replacements);
+	var srcLicense = _fs.readFileSync(LICENSE_FILE, 'utf-8');
+	return stache(srcLicense, replacements);
 }
 
 var UglifyJS = require("uglify-js");
